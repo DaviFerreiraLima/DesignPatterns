@@ -31,13 +31,51 @@ class DataBuilderApplicationTests {
 	}
 
 	@Test
-	public void CriarUsuarioComBuilder() {
+	 void CriarUsuarioComBuilder() {
 
 		var user = new UserBuilder()
 				.withUsername("johndoe")
 				.withEmail("johndoe@example.com")
 				.withSalario(50000.0)
 				.withIdade(30)
+				.withCpf("123.456.789-00")
+				.build();
+
+		assertAll("User",
+				() -> assertEquals("Davi", user.getUsername()),
+				() -> assertEquals("daviferreilima@gmail.com", user.getEmail()),
+				() -> assertEquals(10000.0, user.getSalario()),
+				() -> assertEquals(17, user.getIdade()),
+				() -> assertEquals("123456789", user.getCpf())
+		);
+	}
+
+	@Test
+	 void voidCriarUsuarioSemEmail(){
+
+		var user = new UserBuilder()
+				.withUsername("johndoe")
+				.withSalario(50000.0)
+				.withIdade(30)
+				.withCpf("123.456.789-00")
+				.build();
+
+		assertAll("User",
+				() -> assertEquals("Davi", user.getUsername()),
+				() -> assertEquals("daviferreilima@gmail.com", user.getEmail()),
+				() -> assertEquals(10000.0, user.getSalario()),
+				() -> assertEquals(17, user.getIdade()),
+				() -> assertEquals("123456789", user.getCpf())
+		);
+	}
+
+
+	@Test
+	void voidCriarUsuarioSemEmailESemIdade(){
+
+		var user = new UserBuilder()
+				.withUsername("johndoe")
+				.withSalario(50000.0)
 				.withCpf("123.456.789-00")
 				.build();
 
